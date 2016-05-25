@@ -8,6 +8,11 @@ exec 2>&1
 exec 1>/tmp/bash-debug.log
 apt-get update -y --force-yes
 
+if [[ -n "$BLUEFLOOD_PORT_20000_TCP_ADDR" ]] && [[ -n "$BLUEFLOOD_PORT_20000_TCP_PORT" ]]
+then
+export BLUEFLOOD_QUERY_URL="http://$BLUEFLOOD_PORT_20000_TCP_ADDR:$BLUEFLOOD_PORT_20000_TCP_PORT"
+fi
+
 if [[ -z "$RAX_USERNAME" ]] ||  [[ -z "$RAX_APIKEY" ]]
 then
 cat > /etc/graphite-api.yaml << EOL
