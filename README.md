@@ -1,4 +1,4 @@
-# graphite-api-blueflood-finder-docker
+# docker-graphite-api-blueflood-finder
 
 Builds a docker image with custom Graphite-API and Blueflood Finder. This means you can talk to an external blueflood 
 instance through graphite-api service.
