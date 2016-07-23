@@ -9,11 +9,7 @@ RUN apt-get update && \
     apt-get install -y libffi-dev --force-yes && \
     pip install gunicorn &&\
 	pip install --upgrade "git+http://github.com/rackerlabs/graphite-api.git@george/fetch_multi_with_patches" &&\
-	git -C /tmp clone https://github.com/rackerlabs/blueflood.git &&\
-    git -C /tmp/blueflood checkout master &&\
-	cd /tmp/blueflood/contrib/graphite &&\
-	python setup.py install 
-
+	pip install --upgrade blueflood-graphite-finder
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 

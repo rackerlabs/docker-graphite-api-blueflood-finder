@@ -13,42 +13,51 @@ then
 export BLUEFLOOD_QUERY_URL="http://$BLUEFLOOD_PORT_20000_TCP_ADDR:$BLUEFLOOD_PORT_20000_TCP_PORT"
 fi
 
-if [[ -z "$RAX_USERNAME" ]] ||  [[ -z "$RAX_APIKEY" ]]
-then
 cat > /etc/graphite-api.yaml << EOL
 search_index: /dev/null
 finders:
-  - blueflood.TenantBluefloodFinder
+  - blueflood_graphite_finder.blueflood.TenantBluefloodFinder
 functions:
   - graphite_api.functions.SeriesFunctions
   - graphite_api.functions.PieFunctions
 time_zone: UTC
+logging:
+  version: 1
+  handlers:
+    blueflood_finder_loghandler:
+      class: logging.handlers.RotatingFileHandler
+      filename: /var/log/blueflood-graphite-finder.log
+      formatter: default
+      backupCount: 2
+      maxBytes: 536870912
+  loggers:
+    blueflood_finder:
+      handlers:
+        - blueflood_finder_loghandler
+      propagate: true
+      level: INFO
+  formatters:
+    default:
+      format: '%(asctime)s %(levelname)-8s %(name)-15s %(message)s'
+      datefmt: '%Y-%m-%d %H:%M:%S'
 blueflood:
   tenant: $TENANT_ID
   urls:
     - $BLUEFLOOD_QUERY_URL
-allowed_origins:
 EOL
-else
-cat > /etc/graphite-api.yaml << EOL
-search_index: /dev/null
-finders:
-  - blueflood.TenantBluefloodFinder
-functions:
-  - graphite_api.functions.SeriesFunctions
-  - graphite_api.functions.PieFunctions
-time_zone: UTC
-blueflood:
-  tenant: $TENANT_ID
+
+
+if [[ -n "$RAX_USERNAME" ]] ||  [[ -n "$RAX_APIKEY" ]]
+then
+cat >> /etc/graphite-api.yaml << EOL
   username: $RAX_USERNAME             
   apikey: $RAX_APIKEY                     
-  authentication_module: rax_auth
+  authentication_module: blueflood_graphite_finder.rax_auth
   authentication_class: BluefloodAuth
-  urls:
-    - $BLUEFLOOD_QUERY_URL
-allowed_origins:
 EOL
 fi
+
+echo "allowed_origins:" >> /etc/graphite-api.yaml
 
 if [[ $GRAFANA_URLS == "*" ]]
 then
