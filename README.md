@@ -56,5 +56,5 @@ curl -i -XGET 'http://localhost:8888/metrics/find?query=*'
 
 # References
 
-Custom graphite-api: [https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches)
-blueflood finder: [https://github.com/rackerlabs/blueflood-graphite-finder](https://github.com/rackerlabs/blueflood-graphite-finder) 
+* Custom graphite-api: [https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches)
+* blueflood finder: [https://github.com/rackerlabs/blueflood-graphite-finder](https://github.com/rackerlabs/blueflood-graphite-finder) 
