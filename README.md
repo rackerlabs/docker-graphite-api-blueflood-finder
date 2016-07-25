@@ -19,7 +19,7 @@ Here's the list of ENV variables and their description.
 
 Ports in the above command.
 
-| Port             |   Description                                                 |
+| Port             |   Description                                               |
 | -----------------|-------------------------------------------------------------|
 | 8888             | graphite-api runs as a service and is available on this port.  
 
@@ -32,7 +32,7 @@ docker run -d -p 8888:8888 -e GRAFANA_URLS=http://localhost:3000,http://192.168.
 
 Here's the list of ENV variables and their description.
 
-| Variable             |   Description                                         |
+| Variable             |   Description                                       |
 | ---------------------|-----------------------------------------------------|
 | GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access |
 | BLUEFLOOD_QUERY_URL  | Blueflood query endpoint |
@@ -53,3 +53,8 @@ Here is a sample request to graphite-api service for finding and listing metrics
 ```sh
 curl -i -XGET 'http://localhost:8888/metrics/find?query=*'
 ```
+
+# References
+
+Custom graphite-api: [https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches)
+blueflood finder: [https://github.com/rackerlabs/blueflood-graphite-finder](https://github.com/rackerlabs/blueflood-graphite-finder) 
