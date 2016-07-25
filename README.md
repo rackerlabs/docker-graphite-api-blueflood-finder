@@ -11,17 +11,17 @@ docker run -d -p 8888:8888 -e GRAFANA_URLS=http://localhost:3000,http://192.168.
 
 Here's the list of ENV variables and their description.
 
-| Variable             |   Description                                         |
-| ---------------------|-----------------------------------------------------|
-| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access |
-| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint |
-| TENANT_ID            | Tenantid for which you are setting up graphite-api service |
+| Variable             |   Description                                       |  Default   |
+| ---------------------|-----------------------------------------------------|------------|
+| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access | http://localhost:3000 |
+| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint | http://localhost:20000 |
+| TENANT_ID            | Tenantid for which you are setting up graphite-api service | 123 |
 
 Ports in the above command.
 
-| Port             |   Description                                               |
-| -----------------|-------------------------------------------------------------|
-| 8888             | graphite-api runs as a service and is available on this port.  
+| Port             |   Description                                                  |
+| -----------------|----------------------------------------------------------------|
+| 8888             | graphite-api runs as a service and is available on this port.  |
 
 
 # Run graphite-api service with rackspace metrics as datasource
@@ -32,17 +32,17 @@ docker run -d -p 8888:8888 -e GRAFANA_URLS=http://localhost:3000,http://192.168.
 
 Here's the list of ENV variables and their description.
 
-| Variable             |   Description                                       |
-| ---------------------|-----------------------------------------------------|
-| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access |
-| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint |
-| TENANT_ID            | Tenantid for which you are setting up graphite-api service |
-| RAX_USERNAME         | Rackspace user name |
-| RAX_APIKEY           | Rackspace API key |
+| Variable             |   Description                                       |  Default   |
+| ---------------------|-----------------------------------------------------|------------|
+| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access | http://localhost:3000 |
+| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint | http://localhost:20000 |
+| TENANT_ID            | Tenantid for which you are setting up graphite-api service | 123 |
+| RAX_USERNAME         | Rackspace user name | 	-NA- |
+| RAX_APIKEY           | Rackspace API key |	-NA- |
 
 Ports in the above command.
 
-| Port             |   Description                                                 |
+| Port             |   Description                                               |
 | -----------------|-------------------------------------------------------------|
 | 8888             | graphite-api runs as a service and is available on this port.
 
