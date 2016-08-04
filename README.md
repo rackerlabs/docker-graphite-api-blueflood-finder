@@ -11,7 +11,7 @@ docker run \
     -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
     -e BLUEFLOOD_QUERY_URL=http://localhost:20000 \
     -e TENANT_ID=123 \
-    rackerlabs/graphite-api
+    rackerlabs/graphite-api-blueflood-finder
 ```
 
 Here's the list of ENV variables and their description.
@@ -39,7 +39,7 @@ docker run \
     -e TENANT_ID=123 \
     -e RAX_USERNAME=bftest123 \
     -e RAX_APIKEY=yoda123as \
-    rackerlabs/graphite-api
+    rackerlabs/graphite-api-blueflood-finder
 ```
 
 Here's the list of ENV variables and their description.
