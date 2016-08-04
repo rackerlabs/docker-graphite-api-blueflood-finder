@@ -1,6 +1,6 @@
 # docker-graphite-api-blueflood-finder
 
-Builds a docker image with [custom Graphite-API](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches) and [Blueflood Finder](https://github.com/rackerlabs/blueflood-graphite-finder). This means you can talk to an external blueflood 
+Builds a [docker image](https://hub.docker.com/r/rackerlabs/graphite-api-blueflood-finder/) with [custom Graphite-API](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches) and [Blueflood Finder](https://github.com/rackerlabs/blueflood-graphite-finder). This means you can talk to an external blueflood 
 instance through graphite-api service.
 
 # Run graphite-api service with blueflood as datasource
