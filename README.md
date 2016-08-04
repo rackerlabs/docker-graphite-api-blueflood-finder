@@ -6,7 +6,12 @@ instance through graphite-api service.
 # Run graphite-api service with blueflood as datasource
 
 ```sh
-docker run -d -p 8888:8888 -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 -e BLUEFLOOD_QUERY_URL=http://localhost:20000 -e TENANT_ID=123 rackerlabs/graphite-api
+docker run \
+    -d -p 8888:8888 \
+    -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
+    -e BLUEFLOOD_QUERY_URL=http://localhost:20000 \
+    -e TENANT_ID=123 \
+    rackerlabs/graphite-api
 ```
 
 Here's the list of ENV variables and their description.
@@ -27,7 +32,14 @@ Ports in the above command.
 # Run graphite-api service with rackspace metrics as datasource
 
 ```sh
-docker run -d -p 8888:8888 -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 -e BLUEFLOOD_QUERY_URL=https://global.metrics.api.rackspacecloud.com -e TENANT_ID=123 -e RAX_USERNAME=bftest123 -e RAX_APIKEY=yoda123as rackerlabs/graphite-api
+docker run \
+    -d -p 8888:8888 \
+    -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
+    -e BLUEFLOOD_QUERY_URL=https://global.metrics.api.rackspacecloud.com \
+    -e TENANT_ID=123 \
+    -e RAX_USERNAME=bftest123 \
+    -e RAX_APIKEY=yoda123as \
+    rackerlabs/graphite-api
 ```
 
 Here's the list of ENV variables and their description.
