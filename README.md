@@ -1,11 +1,22 @@
 # docker-graphite-api-blueflood-finder
 
-Builds a [docker image](https://hub.docker.com/r/rackerlabs/graphite-api-blueflood-finder/) with [custom Graphite-API](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches) and [Blueflood Finder](https://github.com/rackerlabs/blueflood-graphite-finder). This means you can talk to an external blueflood 
+Builds a [docker image](https://hub.docker.com/r/rackerlabs/graphite-api-blueflood-finder/) with [custom Graphite-API](https://github.com/rackerlabs/graphite-api/tree/1.1.3-rax.1) and [Blueflood Finder](https://github.com/rackerlabs/blueflood-graphite-finder). This means you can talk to an external blueflood 
 instance through graphite-api service.
+
+# Prerequisites
+
+1. install docker:  https://docs.docker.com/
+
+2. clone this repo
+```sh
+git clone https://github.com/rackerlabs/docker-graphite-api-blueflood-finder.git
+cd docker-graphite-api-blueflood-finder/
+```
 
 # Run graphite-api service with blueflood as datasource
 
 ```sh
+# in the same directory with Dockerfile
 docker run \
     -d -p 8888:8888 \
     -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
@@ -66,7 +77,16 @@ Here is a sample request to graphite-api service for finding and listing metrics
 curl -i -XGET 'http://localhost:8888/metrics/find?query=*'
 ```
 
+# List, Connect, Stop, and Remove Docker containers
+```sh
+docker ps
+docker ps -a
+docker exec -t -i <container_id> /bin/bash
+docker stop <container_id>
+docker rm <container_id>
+```
+
 # References
 
-* Custom graphite-api: [https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches](https://github.com/rackerlabs/graphite-api/tree/george/fetch_multi_with_patches)
+* Custom graphite-api: [https://github.com/rackerlabs/graphite-api/tree/1.1.3-rax.1](https://github.com/rackerlabs/graphite-api/tree/1.1.3-rax.1)
 * blueflood finder: [https://github.com/rackerlabs/blueflood-graphite-finder](https://github.com/rackerlabs/blueflood-graphite-finder) 
