@@ -77,6 +77,15 @@ Here is a sample request to graphite-api service for finding and listing metrics
 curl -i -XGET 'http://localhost:8888/metrics/find?query=*'
 ```
 
+# Build and Push Docker to hub.docker.com
+```sh
+docker build -t rackerlabs/graphite-api-blueflood-finder .
+
+# you will need a login on hub.docker.com with access to the rackerlabs organization
+docker login
+docker push rackerlabs/graphite-api-blueflood-finder
+```
+
 # List, Connect, Stop, and Remove Docker containers
 ```sh
 docker ps
