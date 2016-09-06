@@ -13,16 +13,16 @@ git clone https://github.com/rackerlabs/docker-graphite-api-blueflood-finder.git
 cd docker-graphite-api-blueflood-finder/
 ```
 
-# Run graphite-api service with blueflood as datasource
+# Create environment variables file
 
-```sh
-# in the same directory with Dockerfile
-docker run \
-    -d -p 8888:8888 \
-    -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
-    -e BLUEFLOOD_QUERY_URL=http://localhost:20000 \
-    -e TENANT_ID=123 \
-    rackerlabs/graphite-api-blueflood-finder
+Environment variables file is recommended especially in the case you need to specify API key.
+
+## Create environment variables file  with blueflood as datasource
+
+```
+GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000
+BLUEFLOOD_QUERY_URL=http://localhost:20000
+TENANT_ID=123
 ```
 
 Here's the list of ENV variables and their description.
@@ -31,50 +31,50 @@ Here's the list of ENV variables and their description.
 | ---------------------|-----------------------------------------------------|------------|
 | GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access | http://localhost:3000 |
 | BLUEFLOOD_QUERY_URL  | Blueflood query endpoint | http://localhost:20000 |
-| TENANT_ID            | Tenantid for which you are setting up graphite-api service | 123 |
+| TENANT_ID            | Tenant id for which you are setting up graphite-api service | 123 |
+
+
+
+## Create environment File with Rackspace Metrics as datasource
+```
+GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000
+BLUEFLOOD_QUERY_URL=https://global.metrics.api.rackspacecloud.com
+TENANT_ID=[rackspace account tenant ID]
+RAX_USERNAME=[rackspace user name]
+RAX_APIKEY=[rackspace user api key]
+```
+
+Here's the list of ENV variables and their description.
+
+| Variable             |   Description                                       |  Default   |
+| ---------------------|-----------------------------------------------------|------------|
+| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access | http://localhost:3000 |
+| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint | http://localhost:20000 |
+| TENANT_ID            | Tenant id for which you are setting up graphite-api service | 123 |
+| RAX_USERNAME         | Rackspace user name | 	-NA- |
+| RAX_APIKEY           | Rackspace API key |	-NA- |
+
+# Run graphite-api service with environment file
+
+```sh
+# In the same directory with Dockerfile.
+# If run it anywhere else, the command is use the official docker image instead
+# https://hub.docker.com/r/rackerlabs/graphite-api-blueflood-finder/
+docker run -d -p 9999:8888 --env-file graphite.env rackerlabs/graphite-api-blueflood-finder
+```
 
 Ports in the above command.
 
 | Port             |   Description                                                  |
 | -----------------|----------------------------------------------------------------|
-| 8888             | graphite-api runs as a service and is available on this port.  |
-
-
-# Run graphite-api service with rackspace metrics as datasource
-
-```sh
-docker run \
-    -d -p 8888:8888 \
-    -e GRAFANA_URLS=http://localhost:3000,http://192.168.1.200:3000 \
-    -e BLUEFLOOD_QUERY_URL=https://global.metrics.api.rackspacecloud.com \
-    -e TENANT_ID=123 \
-    -e RAX_USERNAME=bftest123 \
-    -e RAX_APIKEY=yoda123as \
-    rackerlabs/graphite-api-blueflood-finder
-```
-
-Here's the list of ENV variables and their description.
-
-| Variable             |   Description                                       |  Default   |
-| ---------------------|-----------------------------------------------------|------------|
-| GRAFANA_URLS         | To allow [cross-domain requests(CORS) to graphite-api](https://github.com/brutasse/graphite-api/blob/master/docs/configuration.rst), provide comma separated urls which require cross-domain access | http://localhost:3000 |
-| BLUEFLOOD_QUERY_URL  | Blueflood query endpoint | http://localhost:20000 |
-| TENANT_ID            | Tenantid for which you are setting up graphite-api service | 123 |
-| RAX_USERNAME         | Rackspace user name | 	-NA- |
-| RAX_APIKEY           | Rackspace API key |	-NA- |
-
-Ports in the above command.
-
-| Port             |   Description                                               |
-| -----------------|-------------------------------------------------------------|
-| 8888             | graphite-api runs as a service and is available on this port.
+| 9999             | graphite-api runs as a service and is available on this port.  |
 
 # Sample requests
 
 Here is a sample request to graphite-api service for finding and listing metrics available in the system.
 
 ```sh
-curl -i -XGET 'http://localhost:8888/metrics/find?query=*'
+curl -i -XGET 'http://localhost:9999/metrics/find?query=*'
 ```
 
 # Build and Push Docker to hub.docker.com
