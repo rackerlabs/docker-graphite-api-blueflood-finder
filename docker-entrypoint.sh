@@ -71,4 +71,6 @@ else
   done
 fi
 
+/etc/init.d/grafana-server start
+
 gunicorn -b 0.0.0.0:8888 --access-logfile /var/log/gunicorn-access.log --error-logfile /var/log/gunicorn-error.log -w 8 graphite_api.app:app

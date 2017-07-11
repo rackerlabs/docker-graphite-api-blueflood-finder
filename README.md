@@ -60,6 +60,7 @@ Here's the list of ENV variables and their description.
 # In the same directory with Dockerfile.
 # If run it anywhere else, the command is use the official docker image instead
 # https://hub.docker.com/r/rackerlabs/graphite-api-blueflood-finder/
+docker pull rackerlabs/graphite-api-blueflood-finder
 docker run -d -p 9999:8888 --env-file graphite.env rackerlabs/graphite-api-blueflood-finder
 ```
 
