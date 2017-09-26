@@ -78,7 +78,7 @@ Here is a sample request to graphite-api service for finding and listing metrics
 curl -i -XGET 'http://localhost:9999/metrics/find?query=*'
 ```
 
-#Running grafana
+# Running grafana
 Bring up grafana in the browser at 'http://localhost:3000'.  You'll need to add a datasource, 'http://localhost:3000/datasources': name:Blueflood, type:Blueflood, url:http://localhost:8888, access:proxy
 
 Then go here to create a new dashboard: http://localhost:3000/dashboard/new?orgId=1
