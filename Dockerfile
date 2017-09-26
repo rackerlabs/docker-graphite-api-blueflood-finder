@@ -18,6 +18,7 @@ RUN apt-get update && \
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh
 
+EXPOSE 3000
 EXPOSE 8888
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
